@@ -1,0 +1,42 @@
+import numpy as np
+
+def text_to_num(t):
+    return [ord(c)-65 for c in t]
+
+def num_to_text(n):
+    return ''.join(chr(i+65) for i in n)
+
+# Key matrix
+K = np.array([[3, 3],
+              [2, 5]])
+
+# Inverse key matrix (pre-calculated)
+K_inv = np.array([[15, 17],
+                  [20, 9]])
+
+pt = input("Enter Plain Text: ").upper()
+pt = pt.replace(" ", "")
+
+# Encryption
+nums = text_to_num(pt)
+ct = []
+
+for i in range(0, len(nums), 2):
+    pair = np.array(nums[i:i+2])
+    res = K.dot(pair) % 26
+    ct.extend(res)
+
+cipher = num_to_text(ct)
+print("Encrypted:", cipher)
+
+# Decryption
+nums = text_to_num(cipher)
+dt = []
+
+for i in range(0, len(nums), 2):
+    pair = np.array(nums[i:i+2])
+    res = K_inv.dot(pair) % 26
+    dt.extend(res)
+
+plain = num_to_text(dt)
+print("Decrypted:", plain)
