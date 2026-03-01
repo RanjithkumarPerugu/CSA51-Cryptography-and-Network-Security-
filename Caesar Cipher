@@ -1,0 +1,28 @@
+def caesar_encrypt(text, key):
+    result = ""
+    for ch in text:
+        if ch.isalpha():
+            base = ord('A') if ch.isupper() else ord('a')
+            result += chr((ord(ch) - base + key) % 26 + base)
+        else:
+            result += ch
+    return result
+
+def caesar_decrypt(text, key):
+    result = ""
+    for ch in text:
+        if ch.isalpha():
+            base = ord('A') if ch.isupper() else ord('a')
+            result += chr((ord(ch) - base - key) % 26 + base)
+        else:
+            result += ch
+    return result
+
+pt = input("Enter Plain Text: ")
+key = int(input("Enter Key: "))
+
+ct = caesar_encrypt(pt, key)
+print("Encrypted:", ct)
+
+dt = caesar_decrypt(ct, key)
+print("Decrypted:", dt)
