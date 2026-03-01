@@ -1,0 +1,33 @@
+import string
+
+plain = string.ascii_uppercase
+cipher = "QWERTYUIOPASDFGHJKLZXCVBNM"
+
+enc = dict(zip(plain, cipher))
+dec = dict(zip(cipher, plain))
+
+def mono_encrypt(text):
+    res = ""
+    for ch in text.upper():
+        if ch.isalpha():
+            res += enc[ch]
+        else:
+            res += ch
+    return res
+
+def mono_decrypt(text):
+    res = ""
+    for ch in text.upper():
+        if ch.isalpha():
+            res += dec[ch]
+        else:
+            res += ch
+    return res
+
+pt = input("Enter Plain Text: ")
+
+ct = mono_encrypt(pt)
+print("Encrypted:", ct)
+
+dt = mono_decrypt(ct)
+print("Decrypted:", dt)
