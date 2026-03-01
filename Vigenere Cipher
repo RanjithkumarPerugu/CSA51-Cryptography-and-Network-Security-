@@ -1,0 +1,18 @@
+pt = input("Enter Plain Text: ").upper()
+key = input("Enter Key: ").upper()
+
+key = (key * (len(pt)//len(key)+1))[:len(pt)]
+
+# Encryption
+ct = ""
+for i in range(len(pt)):
+    ct += chr((ord(pt[i]) + ord(key[i]) - 2*65) % 26 + 65)
+
+print("Encrypted:", ct)
+
+# Decryption
+dt = ""
+for i in range(len(ct)):
+    dt += chr((ord(ct[i]) - ord(key[i]) + 26) % 26 + 65)
+
+print("Decrypted:", dt)
