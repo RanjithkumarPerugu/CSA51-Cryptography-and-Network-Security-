@@ -1,0 +1,30 @@
+def generate_key(text, key):
+    key = list(key)
+    for i in range(len(text) - len(key)):
+        key.append(key[i % len(key)])
+    return "".join(key)
+
+def encrypt(text, key):
+    res = ""
+    for i in range(len(text)):
+        x = (ord(text[i]) + ord(key[i]) - 2*ord('A')) % 26
+        res += chr(x + ord('A'))
+    return res
+
+def decrypt(text, key):
+    res = ""
+    for i in range(len(text)):
+        x = (ord(text[i]) - ord(key[i]) + 26) % 26
+        res += chr(x + ord('A'))
+    return res
+
+pt = input("Enter Plain Text: ").upper()
+key = input("Enter Key: ").upper()
+
+full_key = generate_key(pt, key)
+
+ct = encrypt(pt, full_key)
+print("Encrypted:", ct)
+
+dt = decrypt(ct, full_key)
+print("Decrypted:", dt)
