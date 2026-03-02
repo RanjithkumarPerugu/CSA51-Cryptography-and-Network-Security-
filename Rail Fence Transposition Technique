@@ -1,0 +1,44 @@
+def rail_encrypt(text, key):
+    rail = [['\n']*len(text) for _ in range(key)]
+    dir, row, col = False, 0, 0
+    for ch in text:
+        rail[row][col] = ch
+        col += 1
+        if row == 0 or row == key-1:
+            dir = not dir
+        row += 1 if dir else -1
+    return ''.join(rail[i][j] for i in range(key) for j in range(len(text)) if rail[i][j] != '\n')
+
+def rail_decrypt(cipher, key):
+    rail = [['\n']*len(cipher) for _ in range(key)]
+    dir, row, col = None, 0, 0
+    for i in range(len(cipher)):
+        rail[row][col] = '*'
+        col += 1
+        if row == 0: dir = True
+        elif row == key-1: dir = False
+        row += 1 if dir else -1
+
+    idx = 0
+    for i in range(key):
+        for j in range(len(cipher)):
+            if rail[i][j] == '*' and idx < len(cipher):
+                rail[i][j] = cipher[idx]
+                idx += 1
+
+    result = []
+    row, col, dir = 0, 0, None
+    for i in range(len(cipher)):
+        result.append(rail[row][col])
+        col += 1
+        if row == 0: dir = True
+        elif row == key-1: dir = False
+        row += 1 if dir else -1
+    return ''.join(result)
+
+pt = input("Enter Plain Text: ")
+key = int(input("Enter Rails: "))
+
+ct = rail_encrypt(pt, key)
+print("Encrypted:", ct)
+print("Decrypted:", rail_decrypt(ct, key))
