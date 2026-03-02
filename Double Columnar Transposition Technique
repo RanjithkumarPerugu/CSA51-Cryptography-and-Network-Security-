@@ -1,0 +1,12 @@
+def col(text, k):
+    return ''.join(text[i::len(k)] for i in range(len(k)))
+
+pt = input("Enter Plain Text: ")
+k1 = input("Enter Key1: ")
+k2 = input("Enter Key2: ")
+
+c1 = col(pt, k1)
+c2 = col(c1, k2)
+
+print("Encrypted:", c2)
+print("Decrypted:", col(col(c2, k2), k1))
