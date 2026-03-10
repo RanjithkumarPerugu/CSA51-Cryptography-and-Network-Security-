@@ -1,0 +1,25 @@
+#include<stdio.h>
+#include<math.h>
+
+int main()
+{
+    int p=3,q=11,n,e=3,d=7;
+    int msg,enc,dec;
+
+    printf("Enter Message: ");
+    scanf("%d",&msg);
+
+    n=p*q;
+
+    enc=pow(msg,e);
+    enc=fmod(enc,n);
+
+    printf("Encrypted Message: %d\n",enc);
+
+    dec=pow(enc,d);
+    dec=fmod(dec,n);
+
+    printf("Decrypted Message: %d",dec);
+
+    return 0;
+}
