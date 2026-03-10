@@ -1,0 +1,23 @@
+#include <stdio.h>
+
+int main() {
+    unsigned int data, key;
+
+    printf("Enter Data: ");
+    scanf("%u",&data);
+
+    printf("Enter Key: ");
+    scanf("%u",&key);
+
+    // Encryption
+    unsigned int cipher = data ^ key;
+
+    printf("Encrypted Data: %u\n",cipher);
+
+    // Decryption
+    unsigned int plain = cipher ^ key;
+
+    printf("Decrypted Data: %u\n",plain);
+
+    return 0;
+}
