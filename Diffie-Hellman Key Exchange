@@ -1,0 +1,17 @@
+p=int(input("Enter prime number: "))
+g=int(input("Enter primitive root: "))
+
+a=int(input("Enter private key of A: "))
+b=int(input("Enter private key of B: "))
+
+A=(g**a)%p
+B=(g**b)%p
+
+print("Public key of A:",A)
+print("Public key of B:",B)
+
+keyA=(B**a)%p
+keyB=(A**b)%p
+
+print("Secret key for A:",keyA)
+print("Secret key for B:",keyB)
